@@ -1,9 +1,6 @@
 package me.minhaz;
 
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,15 +15,16 @@ public class login extends HttpServlet{
 		*/
 		String userName=req.getParameter("userName");
 		String password=req.getParameter("password");
-		
+		String csrf=req.getParameter("csrf");
+
 		String data1="Hello";
 		String data2="Minhaz";
 		
-		Cookie cookie=new Cookie("data1",data1);
-		res.addCookie(cookie);
-		
-		  cookie=new Cookie("data2",data2); 
-		  res.addCookie(cookie);
+		/*
+		 * Cookie cookie=new Cookie("data1",data1); res.addCookie(cookie);
+		 * 
+		 * cookie=new Cookie("data2",data2); res.addCookie(cookie);
+		 */
 	
 		try{
 			
@@ -37,6 +35,7 @@ public class login extends HttpServlet{
 			HttpSession session=req.getSession();
 			session.setAttribute("userName", userName);
 			session.setAttribute("password", password);
+			//session.
 			
 			res.sendRedirect("other");
 			 

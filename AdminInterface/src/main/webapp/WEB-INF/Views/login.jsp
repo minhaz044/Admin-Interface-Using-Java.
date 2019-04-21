@@ -17,9 +17,10 @@
 <body>
 <div class="container">
 	<div class="row ">
-		<div class="col-md-4">Hello</div>
-		<div class="col-md-4 mt-5">
-			<h1 class="text-danger"></h1>
+		<div class="col-md-4"></div>
+		<div class="col-md-4 ">
+		<div class="mt-5">
+				
 			<form action="login.jsp" method="POST">
 		  	<div class="form-group">
 		    <label for="email">User Id:</label>
@@ -30,7 +31,15 @@
 		    <input type="password" class="form-control" name="pwd">
 		  	</div>
 		  	<button type="submit" class="btn btn-success">Submit</button>
-			</form>
+			</form>	
+		</div>
+	
+
+
+		
+			
+		
+
 		</div>
 
 	</div>

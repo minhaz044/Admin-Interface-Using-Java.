@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class DBController {
 	private static Connection DBcon=null;
 	public static Connection getConnection() throws Exception{
-		if(DBcon==null){
+		if(/*DBcon==null*/ 1==1){
 			String url="jdbc:sqlserver://vNTDACWSSQLD002:1433;databaseName=DEV_TEST";
 			String userName="dev_test_dbo";
 			String password="dev_test_dbo123";
@@ -18,7 +18,11 @@ public class DBController {
 				return  DBcon;
 		}
 			
-		}	
+		}
+	
+	
+	
+	
 	}
 	
 	

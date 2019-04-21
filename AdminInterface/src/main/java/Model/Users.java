@@ -20,55 +20,69 @@ public class Users {
 	private String password;
 	private String created_at;
 	private String updated_at;
-	private static Connection connection = null;
-	static {
+	private String type;
+	//private static Connection connection = null;
+	public static ResultSet getAll(){
+		
 		try {
-			connection = DBController.getConnection();
-			System.out.println("From Static Block "+connection);
+			Connection connection =DBController.getConnection();
+			if(connection !=null) {
+				String query="EXEC spusers_GetAll ";
+				Statement statement=connection.createStatement();
+				ResultSet result=statement.executeQuery(query);
+				//connection.close();
+				return result;
+			}
+			
 		}catch(Exception e) {
-			System.out.println("\"Error :@Users.Static: ");
-			log.error("Error :@Users.Static: "+ e);
-
+			log.error("Tables @getAll @Connection "+e);
+			return null;
 		}
-	
+		return null;
 	}
+	
+	
+	
 	public Users get(int id){
 		return null;
 		
 	}
 	public static Users get(String userName,String password){
-		if(connection!=null){
-			try {
-				
-				String query="EXEC spUsersGetUser @userName='"+userName+"',@password='"+password+"'";
-				Statement s = connection.createStatement();
-				ResultSet result=s.executeQuery(query);
-				System.out.println(result.getFetchSize());
-					Users u=new Users();
-					System.out.println("Out");
-					while (result.next()) {
-						System.out.println("Is in result");
-						u.id = Integer.parseInt(result.getString("id"));
-						u.userName = result.getString("userName");
-						u.password=result.getString("password");
-						u.created_at = result.getString("created_at");
-						u.updated_at = result.getString("updated_at");
-						return u;
-					}
-					return null;
-				
-			}catch(Exception e) {
-				log.error("Error : @Users.Get(?,?)"+e);
-				return null;
+		try {
+			Connection connection = DBController.getConnection();
+			System.out.println("From Static Block "+connection);
+			if(connection!=null){
+
+					String query="EXEC spUsersGetUser @userName='"+userName+"',@password='"+password+"'";
+					Statement s = connection.createStatement();
+					ResultSet result=s.executeQuery(query);
+					//System.out.println(result.getFetchSize());
+						Users u=new Users();
+						System.out.println("Out");
+						while (result.next()) {
+							//System.out.println("Is in result");
+							u.id = Integer.parseInt(result.getString("id"));
+							u.userName = result.getString("userName");
+							u.password=result.getString("password");
+							u.created_at = result.getString("created_at");
+							u.updated_at = result.getString("updated_at");
+							u.type=result.getString("type");
+							//connection.close();
+							return u;
+						}
+						return null;
+					
+		
 			}
-		}else {
-			log.info("Connection is not Studlished");
+			
+		}catch(Exception e) {
+			
+			log.error("Users@ get @Connection : "+ e);
 			return null;
+
 		}
 		
-
-		
-
+	return null;
 		
 	}
 

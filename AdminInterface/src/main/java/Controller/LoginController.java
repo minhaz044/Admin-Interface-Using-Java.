@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,17 +17,24 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/Views/homepage.jsp");
 		System.out.println( "password:"+request.getParameter("pwd"));
-		Users user=Users.get(request.getParameter("uname"),request.getParameter("pwd"));
-		System.out.println(user);
+		String userName=request.getParameter("uname");
+		String password=request.getParameter("pwd");
+		HttpSession session=request.getSession();
+		Users user=Users.get(userName,password);
+		//System.out.println(user);
 	try {
 		if(user!=null) {
-			System.out.println(request.getContextPath() );
-			
+			log.info("Login Sucessfull");
+			request.setAttribute("message", "Logedin Sucessfully");
+			request.setAttribute("msgType", "text-success");
+			session.setAttribute("id",user.getId());
+			session.setAttribute("userName",user.getUserName());
+			session.setAttribute("password",user.getPassword());
 			response.sendRedirect(request.getContextPath() + "/homepage.jsp");
-			//request.getRequestDispatcher("/WEB-INF/Views/homepage.jsp").sendRedirect(request,response);
-			System.out.println("Sfter redirect");
+			//System.out.println("Sfter redirect");
 		}else {
-			request.setAttribute("errorMsg", "Failed To login ");
+			request.setAttribute("message", "Failed To login ");
+			request.setAttribute("msgType", "text-danger");
 			request.getRequestDispatcher("/WEB-INF/Views/login.jsp").forward(request,response);
 		}
 	} catch (Exception e) {

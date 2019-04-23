@@ -25,8 +25,8 @@ public class LoginController extends HttpServlet {
 	try {
 		if(user!=null) {
 			log.info("Login Sucessfull");
-			request.setAttribute("message", "Logedin Sucessfully");
-			request.setAttribute("msgType", "text-success");
+			session.setAttribute("message", "Login Sucessfull");
+			session.setAttribute("msgType", "text-success");
 			session.setAttribute("id",user.getId());
 			session.setAttribute("userName",user.getUserName());
 			session.setAttribute("password",user.getPassword());

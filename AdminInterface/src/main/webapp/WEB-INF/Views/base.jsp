@@ -13,4 +13,20 @@
 </head>
 <body>
 <div class=".container-fluid">
-	<div class="p-3 mb-2 bg-dark text-white">Wellcome to Admin Page.</div> 
+<div  class="p-3 mb-2 bg-dark text-white">
+<div class="row">
+<div class="col-md-10"><span class="">Wellcome to Admin Page. </span></div>
+<div class="col-md-2"><span class="mr-3"><%= session.getAttribute("userName")%></span><a href="#">Log Out</a></div>
+
+</div> 
+
+
+</div>
+	 
+	<% if(session.getAttribute("message")!=null){%>
+	<div class=" <%= session.getAttribute("msgType") %> text-center"> <%= session.getAttribute("message") %></div> 
+	<% session.setAttribute("message", null);} %>
+
+
+
+	

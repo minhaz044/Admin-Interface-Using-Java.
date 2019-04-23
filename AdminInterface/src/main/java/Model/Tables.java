@@ -39,6 +39,33 @@ public static ResultSet getAll() {
 
 }
 
+public static ResultSet get(Integer id) {
+	 
+	try {
+		Connection connection =DBController.getConnection();
+		if(connection !=null) {
+			String query="EXEC sptablesGet @id="+id;
+			Statement statement=connection.createStatement();
+			ResultSet result=statement.executeQuery(query);
+			if(result.next()) {
+				query="SELECT * FROM "+result.getString("name");
+			}else {
+				return null;
+			}
+			result=statement.executeQuery(query);
+			//connection.close();
+			return result;
+		}
+		
+	}catch(Exception e) {
+		log.error("Tables @getAll @Connection "+e);
+		return null;
+	}
+	return null;
+	
+
+
+}
 
 	
 	

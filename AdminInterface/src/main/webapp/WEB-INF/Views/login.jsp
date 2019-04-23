@@ -15,6 +15,9 @@
 
 </head>
 <body>
+<% if(request.getAttribute("message")!=null){%>
+<div class=" <%= request.getAttribute("msgType") %> text-center"> <%= request.getAttribute("message") %></div> 
+<% request.setAttribute("message", null);} %>
 <div class="container">
 	<div class="row ">
 		<div class="col-md-4"></div>

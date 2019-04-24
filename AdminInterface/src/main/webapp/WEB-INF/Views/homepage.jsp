@@ -41,7 +41,9 @@ else{
 	ResultSet resultcolumn=(ResultSet)request.getAttribute("column");
 	String columnName=null;
 	String dta;
+	String id=null;
 	if(resultcolumn.next()){
+		 id=resultcolumn.getString("COLUMN_NAME");
 		resultcolumn.next();
 		 columnName=resultcolumn.getString("COLUMN_NAME");
 		 %>
@@ -52,12 +54,13 @@ else{
 	}
 
 	while(resultData.next()){
+		
 	%>
    	<tr>
       <td>
       <%=resultData.getString(columnName) %>
       </td>
-      <td><a class="btn btn-success">Update</a></td>
+      <td><a href="/update.jsp?id=<%=resultData.getString(id).trim()%>&name=${tableName}" class="btn btn-success">Update</a></td>
       <td><a class="btn btn-danger">Delete</a></td>
      </tr>
     <%

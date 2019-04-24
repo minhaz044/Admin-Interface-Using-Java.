@@ -32,7 +32,7 @@ public class TableSchema {
 		try {
 			Connection connection =DBController.getConnection();
 			if(connection !=null) {
-String query="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='"+tableName+"' AND TABLE_CATALOG='DEV_TEST'" ;
+String query="SELECT * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='"+tableName+"' AND TABLE_CATALOG='DEV_TEST'" ;
 				Statement statement=connection.createStatement();
 				ResultSet result=statement.executeQuery(query);
 				//connection.close();
@@ -46,8 +46,33 @@ String query="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAM
 		return null;
 	}	
 	
+	
+	public static ResultSet getAllColumnInfo(String tableName) {
+		try {
+			Connection connection =DBController.getConnection();
+			if(connection !=null) {
+				String query="SELECT * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='"+tableName+"' AND TABLE_CATALOG='DEV_TEST'" ;
+				System.out.println("Query:"+query);
+				Statement statement=connection.createStatement();
+				ResultSet result=statement.executeQuery(query);
+				System.out.println("The Result is: "+result.getString("COLUMN_NAME"));
+				//connection.close();
+				return result;
+			}
+			
+		}catch(Exception e) {
+			log.error("Tables @getAll @Connection "+e);
+			return null;
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
 	public static ResultSet getAllData(String tableName) {
-		System.out.println("getAllData Function Called");
+		
 		try {
 			Connection connection =DBController.getConnection();
 			if(connection !=null) {
@@ -64,7 +89,42 @@ String query="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAM
 			return null;
 		}
 		return null;
-	}		
+	}
+	
+	
+	
+	public static ResultSet get(String tableName,String id) {
+		
+		try {
+			Connection connection =DBController.getConnection();
+			if(connection !=null) {
+				ResultSet columnName=getAllColumnName(tableName);
+				System.out.println("*******Name"+tableName);
+				if(columnName.next()) {
+					String query="SELECT * FROM  "+tableName +" WHERE "+columnName.getString("COLUMN_NAME")+"='"+id+"'";
+					System.out.println(query);
+					Statement statement=connection.createStatement();
+					ResultSet result=statement.executeQuery(query);
+					/*
+					 * if(result.next()) { System.out.println(result.getString("password")); }else {
+					 * System.out.println("wRONG"); }
+					 */
+				
+					return result;
+				}
+
+			}
+			
+		}catch(Exception e) {
+			log.error("Tables @getAll @Connection "+e);
+			return null;
+		}
+		return null;
+	}	
+	
+	
+	
+	
 	
 }
 

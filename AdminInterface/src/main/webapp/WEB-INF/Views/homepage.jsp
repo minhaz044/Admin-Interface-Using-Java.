@@ -17,10 +17,8 @@
 	<a class="text-white" href="/homepage.jsp?id=<%=resultIndex.getString("TABLE_NAME") %>"><p class="border-right border-bottom bg-success ">
 	<%= resultIndex.getString("TABLE_NAME").substring(0, 1).toUpperCase() + resultIndex.getString("TABLE_NAME").substring(1).toLowerCase() %>
 	</p></a>
-<% 	
-}
-else{
-%>
+<% 	}else{%>
+
 	<a class="text-dark" href="/homepage.jsp?id=<%=resultIndex.getString("TABLE_NAME") %>"><p class="border-right border-bottom  ">
 	<%= resultIndex.getString("TABLE_NAME").substring(0, 1).toUpperCase() + resultIndex.getString("TABLE_NAME").substring(1).toLowerCase() %>
 	 </p></a>
@@ -61,7 +59,7 @@ else{
       <%=resultData.getString(columnName) %>
       </td>
       <td><a href="/update.jsp?id=<%=resultData.getString(id).trim()%>&name=${tableName}" class="btn btn-success">Update</a></td>
-      <td><a class="btn btn-danger">Delete</a></td>
+      <td><a href="/delete.jsp?id=<%=resultData.getString(id).trim()%>&name=${tableName}" class="btn btn-danger">Delete</a></td>
      </tr>
     <%
     }

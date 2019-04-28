@@ -141,22 +141,48 @@ public class TableSchema {
 					 int result=statement.executeUpdate(query);
 					 if(result>0) {
 						 return true;
-					 }
-					 	 
+					 } 	 
 				}
 
 			} catch (Exception e) {
 				log.error("Tables @update @Connection " + e);
-
 			}
-
 		} else {
 			log.info("Data and Index are not Same: Upadate Failed:try Again  ");
 
 		}
+		return false;
+	}
+	
+	
+	public static Boolean delete(String tableName, String id) {
+		
+		try {
+			Connection connection = DBController.getConnection();
+			if (connection != null) {
+				ResultSet columnName = getAllColumnName(tableName);
+				System.out.println("*******Name" + tableName);
+				if (columnName.next()) {
+					String query = "DELETE " + tableName + " WHERE " + columnName.getString("COLUMN_NAME")+ "='" + id + "'";
+					System.out.println(query);
+					Statement statement = connection.createStatement();
+					int result = statement.executeUpdate(query);
+					if(result>0) {
+						return true;
+					}
+				}
+			}
+		} catch (Exception e) {
+			log.error("Tables @delete @Connection " + e);
+			return false;
+		}
+	
 
 		return false;
 
-	}
+	}	
+	
+	
+	
 
 }

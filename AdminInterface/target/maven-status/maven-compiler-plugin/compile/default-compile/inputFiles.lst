@@ -1,7 +1,9 @@
 N:\git\Servlet\AdminInterface\src\main\java\Controller\HomepageController.java
+N:\git\Servlet\AdminInterface\src\main\java\Controller\UpdateController.java
 N:\git\Servlet\AdminInterface\src\main\java\Model\TableSchema.java
 N:\git\Servlet\AdminInterface\src\main\java\Controller\LoginController.java
 N:\git\Servlet\AdminInterface\src\main\java\Model\Tables.java
 N:\git\Servlet\AdminInterface\src\main\java\Services\DBController.java
 N:\git\Servlet\AdminInterface\src\main\java\Model\Users.java
+N:\git\Servlet\AdminInterface\src\main\java\Services\Forms.java
 N:\git\Servlet\AdminInterface\src\main\java\Services\ValidationServices.java

@@ -34,7 +34,6 @@
   	<tbody>
 	<%
 	if(request.getAttribute("data")!=null && request.getAttribute("column")!=null ){
-	
 	ResultSet resultData=(ResultSet)request.getAttribute("data");
 	ResultSet resultcolumn=(ResultSet)request.getAttribute("column");
 	String columnName=null;
@@ -46,14 +45,8 @@
 		 columnName=resultcolumn.getString("COLUMN_NAME");
 		 %>
 		 <%= columnName %>		
-<% 		 
-	}else{
-		
-	}
-
-	while(resultData.next()){
-		
-	%>
+<% 	}else{	}
+	while(resultData.next()){%>
    	<tr>
       <td>
       <%=resultData.getString(columnName) %>
@@ -61,15 +54,20 @@
       <td><a href="/update.jsp?id=<%=resultData.getString(id).trim()%>&name=${tableName}" class="btn btn-success">Update</a></td>
       <td><a href="/delete.jsp?id=<%=resultData.getString(id).trim()%>&name=${tableName}" class="btn btn-danger">Delete</a></td>
      </tr>
-    <%
-    }
-	}
-	%> 
-  
+    <%}%>
+	<% }%> 
   </tbody>
 </table>
 	<p>
 	</div>
+		<div class="col-md-1">
+	<div class="m-3 text-center">
+	<p class="border-bottom m-3">
+	<a href="/add.jsp?name=${tableName}" class="btn btn-success">Add</a>
+	</p>
+	</div>
+	</div>
+	
 	</div>
 
 

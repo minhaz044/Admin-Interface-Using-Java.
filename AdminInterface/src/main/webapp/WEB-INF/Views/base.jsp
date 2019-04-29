@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@page import="Controller.SessionController"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,14 +17,23 @@
 <div  class="p-3 mb-2 bg-dark text-white">
 <div class="row">
 <div class="col-md-10"><span class="">Wellcome to Admin Page. </span></div>
-<div class="col-md-2"><span class="mr-3"><%= session.getAttribute("userName")%></span><a href="#">Log Out</a></div>
+<div class="col-md-2"><span class="mr-3">
+<% if(SessionController.checkSession(request)){
+	response.sendRedirect("http://www.google.com");
+
+response.setStatus(response.SC_MOVED_TEMPORARILY);
+response.setHeader("Location", "http://www.google.com"); 
+	
+ }else{%>
+<%= session.getAttribute("userName")%>
+<%} %>
+</span><a href="#">Log Out</a></div>
 
 </div> 
 
 
-</div>
-	 
-	<% if(session.getAttribute("message")!=null){%>
+</div> 
+	<%if(session.getAttribute("message")!=null){%>
 	<div class=" <%= session.getAttribute("msgType") %> text-center"> <%= session.getAttribute("message") %></div> 
 	<% session.setAttribute("message", null);} %>
 

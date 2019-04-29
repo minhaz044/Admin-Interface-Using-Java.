@@ -1,10 +1,13 @@
 N:\New folder\Servlet\AdminInterface\src\main\java\Controller\UpdateController.java
-N:\New folder\Servlet\AdminInterface\src\main\java\Model\Tables.java
 N:\New folder\Servlet\AdminInterface\src\main\java\Controller\DeleteController.java
+N:\New folder\Servlet\AdminInterface\src\main\java\Controller\InsertController.java
 N:\New folder\Servlet\AdminInterface\src\main\java\Controller\LoginController.java
-N:\New folder\Servlet\AdminInterface\src\main\java\Controller\HomepageController.java
 N:\New folder\Servlet\AdminInterface\src\main\java\Services\DBController.java
 N:\New folder\Servlet\AdminInterface\src\main\java\Model\TableSchema.java
-N:\New folder\Servlet\AdminInterface\src\main\java\Model\Users.java
 N:\New folder\Servlet\AdminInterface\src\main\java\Services\ValidationServices.java
+N:\New folder\Servlet\AdminInterface\src\main\java\Model\Tables.java
+N:\New folder\Servlet\AdminInterface\src\main\java\Controller\LogoutController.java
+N:\New folder\Servlet\AdminInterface\src\main\java\Controller\HomepageController.java
+N:\New folder\Servlet\AdminInterface\src\main\java\Model\Users.java
+N:\New folder\Servlet\AdminInterface\src\main\java\Controller\SessionController.java
 N:\New folder\Servlet\AdminInterface\src\main\java\Services\Forms.java

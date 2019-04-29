@@ -16,41 +16,25 @@ import Model.TableSchema;
 import Services.Forms;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
-@WebServlet(urlPatterns="/update.jsp")
-public class UpdateController extends HttpServlet{
-
-	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+@WebServlet(urlPatterns="/add.jsp")
+public class InsertController  extends HttpServlet{
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		//SessionController.checkSession(request,response);
-		
-		if(request.getParameter("name")!=null && request.getParameter("id")!=null) {
+		if(request.getParameter("name")!=null) {
 			String tableName=request.getParameter("name");
-			String id=request.getParameter("id");
-			ResultSet tableIndex=null;
-			ResultSet tableInfo=TableSchema.getAllColumnName(tableName);
-			try {
-				System.out.println("This is from DeGet Index 1 :"+tableInfo.getString("COLUMN_NAME") );
-			} catch (SQLException e2) {
-				System.out.println("No Data Found");
-			}
-			try {
-				System.out.println("tableInfo:"+tableInfo.getString(1));
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			ResultSet tableData=TableSchema.get(tableName, id);
-			Forms form=new Forms("POST","update.jsp");
+			ResultSet columnName=TableSchema.getAllColumnName(tableName);
+			Forms form=new Forms("POST","add.jsp");
 			String type=null;
 			String name=null;
 			String temptype=null;
-			String CurrentIndex=null;
 			form.varchar(null, "Hidden", "tableName", tableName,"");
+			
 			int counter =0;
 			try {
-				if(tableData.next()) {
-						while(tableInfo.next()) {
-							temptype=tableInfo.getString("DATA_TYPE");
-							CurrentIndex=tableInfo.getString("COLUMN_NAME");
+						columnName.next();
+						while(columnName.next()) {
 							
+							temptype=columnName.getString("DATA_TYPE");
 							if(temptype.equals("int")) {
 								type="number";
 							}else if(temptype.equals("datetime")) {
@@ -58,44 +42,32 @@ public class UpdateController extends HttpServlet{
 							}else  {
 								type="text";
 							}
-							name=tableInfo.getString("COLUMN_NAME");
+							name=columnName.getString("COLUMN_NAME");
 							if(counter==0) {
-								form.varchar(name, type, name, tableData.getString(CurrentIndex),"readonly");
+								form.varchar(name, type, name,"","required");
 								counter++;
 							}else {
-								form.varchar(name, type, name, tableData.getString(CurrentIndex),"");								
+								form.varchar(name, type, name,"","required");								
 							}
-
-							
-						}
 					}
-
 				request.setAttribute("forms", form.getForm());
-				request.getRequestDispatcher("/WEB-INF/Views/update.jsp").forward(request,response);
+				request.getRequestDispatcher("/WEB-INF/Views/add.jsp").forward(request,response);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
 		}else {
 			try {
 				response.sendRedirect(request.getContextPath() + "/homepage.jsp");
 			} catch (IOException e) {
-				log.error("From @update @doGet @Catch:"+ e);
-				
+				log.error("From @insert @doGet @Catch:"+ e);
 			}
-		}
-		
+		}	
 	}
 	
-	protected void doPost(HttpServletRequest request,HttpServletResponse response) {
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException{
 		//SessionController.checkSession(request,response);
 		
 		if(request.getParameter("tableName")!=null ) {
-			
-			
-			 
-			
-	
 			ArrayList<String> data=new ArrayList();
 			ArrayList<String> index=new ArrayList();
 			String columnName;
@@ -110,16 +82,15 @@ public class UpdateController extends HttpServlet{
 					System.out.println(columnName + " : "+ request.getParameter(columnName));
 				}
 				
-				if(TableSchema.update(request.getParameter("tableName"),index,data)) {
-						log.info("Update Successfull");
-						
-						session.setAttribute("message", "Updated Sucessfull");
+				if(TableSchema.insert(request.getParameter("tableName"),index,data)) {
+						log.info("Insertion Successfull");
+						session.setAttribute("message", "Insertion Sucessfull");
 						session.setAttribute("msgType", "text-success");
-						response.sendRedirect(request.getContextPath() + "/update.jsp?id="+data.get(0)+"&name="+request.getParameter("tableName"));
+						response.sendRedirect(request.getContextPath() + "/homepage.jsp?id="+request.getParameter("tableName"));
 					
 				}else {
-					log.info("Update Failed");
-					session.setAttribute("message", "Updated Failed");
+					log.info("Insertion Failed");
+					session.setAttribute("message", "Insertion Failed");
 					session.setAttribute("msgType", "text-danger");
 				}
 				
@@ -136,9 +107,6 @@ public class UpdateController extends HttpServlet{
 			log.error("Invalid Input ! \n Try Again ");
 			
 		}
-		
-		
-
 		
 	}
 }

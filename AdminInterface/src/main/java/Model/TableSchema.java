@@ -183,6 +183,41 @@ public class TableSchema {
 	}	
 	
 	
-	
+	public static Boolean insert(String tableName, ArrayList<String> index, ArrayList<String> data) {
+
+		int length=data.size();
+		if ( length>0 && index.size() == length) {
+
+			try {
+				Connection connection = DBController.getConnection();
+				if (connection != null) {
+					 String queryFirstPart="INSERT INTO  "+tableName +"(";
+					 String queryLastPart="VALUES(";
+					 for(int i=1;i<length;i++) {
+						 queryFirstPart+=index.get(i)+" , ";
+						 queryLastPart+="'"+data.get(i)+"' , ";
+						 
+					 }
+					 queryLastPart=(queryLastPart.substring(0, queryLastPart.length()-2))+")";
+					 queryFirstPart=(queryFirstPart.substring(0, queryFirstPart.length()-2))+")";
+
+					 queryFirstPart+=queryLastPart;
+					 System.out.println(queryFirstPart);
+					 Statement statement=connection.createStatement();
+					 int result=statement.executeUpdate(queryFirstPart);
+					 if(result>0) {
+						 return true;
+					 } 	 
+				}
+
+			} catch (Exception e) {
+				log.error("Tables @update @Connection " + e);
+			}
+		} else {
+			log.info("Data and Index are not Same: Upadate Failed:try Again  ");
+
+		}
+		return false;
+	}	
 
 }

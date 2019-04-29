@@ -27,7 +27,7 @@ public class Forms {
 					 +"<label for="+doubleQuote+name+doubleQuote+">"+levelName+"</label>"
 					 +"<input type="+doubleQuote+type+doubleQuote+"class="+doubleQuote+"form-control"
 					 +doubleQuote+"id="+doubleQuote+name+doubleQuote+ "name="+doubleQuote+name+doubleQuote+ "value="+doubleQuote+value+doubleQuote+"aria-describedby="
-					 +doubleQuote+"emailHelp"+doubleQuote+" placeholder="+doubleQuote+"Enter email"+doubleQuote+" "+attribute+"></div>";
+					 +doubleQuote+"emailHelp"+doubleQuote+" placeholder="+doubleQuote+"Enter "+levelName+doubleQuote+" "+attribute+"></div>";
 		}		 
 	}
 	public  void radio() {

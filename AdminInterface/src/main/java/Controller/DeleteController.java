@@ -16,23 +16,20 @@ import lombok.extern.slf4j.Slf4j;
 @WebServlet(urlPatterns="/delete.jsp")
 public class DeleteController extends HttpServlet{
 
-	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException{
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		
-		//System.out.println("This is from do ");
-		
-		try {
-			request.setAttribute("tableName",request.getParameter("name"));
-			request.setAttribute("id",request.getParameter("id") );
-			request.getRequestDispatcher("/WEB-INF/Views/delete.jsp").forward(request,response);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			try {
+				request.setAttribute("tableName",request.getParameter("name"));
+				request.setAttribute("id",request.getParameter("id") );
+				request.getRequestDispatcher("/WEB-INF/Views/delete.jsp").forward(request,response);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+	
 	}
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		
 		if(TableSchema.delete(request.getParameter("name"), request.getParameter("id"))) {
 			HttpSession session=request.getSession();
 			session.setAttribute("message", "Deleted Sucessfull");
@@ -44,8 +41,9 @@ public class DeleteController extends HttpServlet{
 			session.setAttribute("msgType", "text-danger");
 		}
 		
+
 		
-	}
-	
+  }
+
 
 }

@@ -11,8 +11,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <meta charset="ISO-8859-1">
 <title>Wellcome to Login Page</title>
-
-
 </head>
 <body>
 <% if(request.getAttribute("message")!=null){%>

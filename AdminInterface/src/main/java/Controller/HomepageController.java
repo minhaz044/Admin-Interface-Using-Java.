@@ -17,7 +17,7 @@ import Model.Users;
 @WebServlet(urlPatterns="/homepage.jsp")
 public class HomepageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		
+		//SessionController.checkSession(request,response);
 		ResultSet index=TableSchema.getAllTableName();
 		request.setAttribute("index", index);
 	

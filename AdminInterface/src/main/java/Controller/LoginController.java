@@ -21,7 +21,6 @@ public class LoginController extends HttpServlet {
 		String password=request.getParameter("pwd");
 		HttpSession session=request.getSession();
 		Users user=Users.get(userName,password);
-		//System.out.println(user);
 	try {
 		if(user!=null) {
 			log.info("Login Sucessfull");
@@ -31,20 +30,17 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("userName",user.getUserName());
 			session.setAttribute("password",user.getPassword());
 			response.sendRedirect(request.getContextPath() + "/homepage.jsp");
-			//System.out.println("Sfter redirect");
 		}else {
 			request.setAttribute("message", "Failed To login ");
 			request.setAttribute("msgType", "text-danger");
 			request.getRequestDispatcher("/WEB-INF/Views/login.jsp").forward(request,response);
 		}
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		log.error("Error From LoginController: "+e);
 	}
-		
-
-	}
+}
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("FROM DOGET ");
 		request.getRequestDispatcher("/WEB-INF/Views/login.jsp").forward(request,response);
 	}
 	

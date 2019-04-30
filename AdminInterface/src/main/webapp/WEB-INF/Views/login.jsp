@@ -13,9 +13,9 @@
 <title>Wellcome to Login Page</title>
 </head>
 <body>
-<% if(request.getAttribute("message")!=null){%>
-<div class=" <%= request.getAttribute("msgType") %> text-center"> <%= request.getAttribute("message") %></div> 
-<% request.setAttribute("message", null);} %>
+<% if(session.getAttribute("message")!=null){%>
+<div class=" <%= session.getAttribute("msgType") %> text-center"> <%= session.getAttribute("message") %></div> 
+<% session.setAttribute("message", null);} %>
 <div class="container">
 	<div class="row ">
 		<div class="col-md-4"></div>

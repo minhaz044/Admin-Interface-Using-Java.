@@ -17,7 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 public class DeleteController extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		
+		if(SessionController.checkSession(request)){
+
 			try {
 				request.setAttribute("tableName",request.getParameter("name"));
 				request.setAttribute("id",request.getParameter("id") );
@@ -27,22 +28,33 @@ public class DeleteController extends HttpServlet{
 				e.printStackTrace();
 			}
 
-	
-	}
-	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		if(TableSchema.delete(request.getParameter("name"), request.getParameter("id"))) {
-			HttpSession session=request.getSession();
-			session.setAttribute("message", "Deleted Sucessfull");
-			session.setAttribute("msgType", "text-success");
-			response.sendRedirect(request.getContextPath() + "/homepage.jsp?id="+request.getParameter("name")+"");
 		}else {
 			HttpSession session=request.getSession();
-			session.setAttribute("message", "Operation Failed");
+			session.setAttribute("message", "Please Login!");
 			session.setAttribute("msgType", "text-danger");
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
 		}
-		
 
-		
+	}
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		if(SessionController.checkSession(request)){
+			if(TableSchema.delete(request.getParameter("name"), request.getParameter("id"))) {
+				HttpSession session=request.getSession();
+				session.setAttribute("message", "Deleted Sucessfull");
+				session.setAttribute("msgType", "text-success");
+				response.sendRedirect(request.getContextPath() + "/homepage.jsp?id="+request.getParameter("name")+"");
+			}else {
+				HttpSession session=request.getSession();
+				session.setAttribute("message", "Operation Failed");
+				session.setAttribute("msgType", "text-danger");
+			}	
+		}else {
+			HttpSession session=request.getSession();
+			session.setAttribute("message", "Please Login!");
+			session.setAttribute("msgType", "text-danger");
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+		}
+	
   }
 
 

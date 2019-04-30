@@ -18,8 +18,8 @@ public class Users {
 	private Integer id; 
 	private String userName;
 	private String password;
-	private String created_at;
-	private String updated_at;
+	//private String created_at;
+	//private String updated_at;
 	private String type;
 	//private static Connection connection = null;
 	public static ResultSet getAll(){
@@ -54,18 +54,17 @@ public class Users {
 			if(connection!=null){
 
 					String query="EXEC spUsersGetUser @userName='"+userName+"',@password='"+password+"'";
+					System.out.println(query);
 					Statement s = connection.createStatement();
 					ResultSet result=s.executeQuery(query);
 					//System.out.println(result.getFetchSize());
 						Users u=new Users();
 						System.out.println("Out");
 						while (result.next()) {
-							//System.out.println("Is in result");
+							System.out.println("Is in result");
 							u.id = Integer.parseInt(result.getString("id"));
 							u.userName = result.getString("userName");
 							u.password=result.getString("password");
-							u.created_at = result.getString("created_at");
-							u.updated_at = result.getString("updated_at");
 							u.type=result.getString("type");
 							//connection.close();
 							return u;

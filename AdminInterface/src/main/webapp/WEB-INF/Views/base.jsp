@@ -18,16 +18,8 @@
 <div class="row">
 <div class="col-md-10"><span class="">Wellcome to Admin Page. </span></div>
 <div class="col-md-2"><span class="mr-3">
-<% if(SessionController.checkSession(request)){
-	response.sendRedirect("http://www.google.com");
-
-response.setStatus(response.SC_MOVED_TEMPORARILY);
-response.setHeader("Location", "http://www.google.com"); 
-	
- }else{%>
 <%= session.getAttribute("userName")%>
-<%} %>
-</span><a href="#">Log Out</a></div>
+</span><a href="/logout.jsp">Log Out</a></div>
 
 </div> 
 

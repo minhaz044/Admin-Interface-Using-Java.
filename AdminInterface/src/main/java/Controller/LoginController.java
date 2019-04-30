@@ -31,8 +31,8 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("password",user.getPassword());
 			response.sendRedirect(request.getContextPath() + "/homepage.jsp");
 		}else {
-			request.setAttribute("message", "Failed To login ");
-			request.setAttribute("msgType", "text-danger");
+			session.setAttribute("message", "Invalid Password Or UserName ");
+			session.setAttribute("msgType", "text-danger");
 			request.getRequestDispatcher("/WEB-INF/Views/login.jsp").forward(request,response);
 		}
 	} catch (Exception e) {

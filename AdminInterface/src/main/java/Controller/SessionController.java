@@ -23,8 +23,8 @@ public class SessionController {
 		if (session.getAttribute("id") == null || session.getAttribute("userName") == null || session.getAttribute("password") == null ) {
 			request.setAttribute("message", "Please Login!");
 			request.setAttribute("msgType", "text-success");
-			return true;
+			return false;
 		} 
-		return false;
+		return true;
 	}
 }

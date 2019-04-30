@@ -17,7 +17,7 @@ public class TableSchema {
 		try {
 			Connection connection = DBController.getConnection();
 			if (connection != null) {
-				String query = "SELECT * FROM INFORMATION_SCHEMA.TABLES";
+				String query = "SELECT * FROM INFORMATION_SCHEMA.TABLES ORDER BY TABLE_NAME ";
 				Statement statement = connection.createStatement();
 				ResultSet result = statement.executeQuery(query);
 				// connection.close();

@@ -1,6 +1,9 @@
 <%@page import="java.sql.ResultSet"%>
 <jsp:include page="base.jsp" />
-
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Expires", "0");
+%>
 <!-- ------------------------------------------------------->
 	<div class="row ">
 	<div class="col-md-2">

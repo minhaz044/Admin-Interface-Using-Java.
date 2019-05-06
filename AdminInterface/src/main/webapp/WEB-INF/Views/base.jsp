@@ -18,7 +18,12 @@
 <div class="row">
 <div class="col-md-10"><span class="">Wellcome to Admin Page. </span></div>
 <div class="col-md-2"><span class="mr-3">
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Expires", "0");
+%>
 <%= session.getAttribute("userName")%>
+
 </span><a href="/logout.jsp">Log Out</a></div>
 
 </div> 
